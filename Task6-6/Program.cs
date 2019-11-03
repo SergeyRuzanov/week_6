@@ -28,12 +28,12 @@ namespace Task6_3
                 index = stack.Pop();
                 if (direction == Direction.left)
                 {
-                    if (list[index, 0] > list[index0, 0])
+                    if (list[index, 0] >= list[index0, 0])
                         return false;
                 }
                 else
                 {
-                    if (list[index, 0] < list[index0, 0])
+                    if (list[index, 0] <= list[index0, 0])
                         return false;
                 }
                 if (list[index, 2] != -1)
@@ -49,19 +49,12 @@ namespace Task6_3
             {
                 return true;
             }
-            int index0 = 0;
             Stack<int> stack = new Stack<int>();
-            Stack<int> stackOut = new Stack<int>();
-            stackOut.Push(index0);
-            while (stackOut.Count != 0)
+            for (int i = 0; i < list.GetLength(0); i++)
             {
-                index0 = stackOut.Pop();
+                int index0 = i;
                 if (!CheckSubtree(list, index0, Direction.left, stack) || !CheckSubtree(list, index0, Direction.right, stack))
                     return false;
-                if (list[index0, 2] != -1)
-                    stackOut.Push(list[index0, 2]);
-                if (list[index0, 1] != -1)
-                    stackOut.Push(list[index0, 1]);
             }
             return true;
         }
